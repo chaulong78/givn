@@ -1,0 +1,108 @@
+<form:form
+                                            action="${pageContext.request.contextPath}/admin/course/edit"
+                                            method="post" class="col s12" modelAttribute="course">
+                                        <input type="hidden" name="id" value="${course.id}">
+                                        <input type="hidden" name="authorId" value="${course.authorId}">
+                                        <input type="hidden" id="typeId" value="${course.typeId}"
+                                               name="typeId">
+                                        <div class="row">
+                                            <div class="col s3 m2 15">
+                                                <img src="${course.image}"
+                                                     alt="Avatar"
+                                                     class="circle responsive-img valign profile-image cyan">
+                                            </div>
+                                            <div class="col s4 m4 14">
+                                                <input type="file" id="file" name="file" class="dropify"
+                                                       value="${profileDTO.avatar}"
+                                                       enctype="multipart/form-data" data-default-file=""/>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <input id="name" name="name" type="text"
+                                                           value="${course.name}" required>
+                                                    <label for="name">Tên khóa học</label>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <select id="select">
+                                                        <c:forEach var="type" items="${typeList}">
+                                                            <option value="${type.id}" ${course.typeId==type.id ? 'selected':''}>${type.name}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                    <label>Thể loại khóa học</label>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <input id="author" name="author" type="text"
+                                                           value="${author}" disabled="disabled">
+                                                    <label for="author">Tác giả</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="input-field col s2">
+                                                <input id="price" name="price" type="number"
+                                                       value="${course.price}" required>
+                                                <label for="price">Giá khóa học</label>
+                                            </div>
+                                            <div class="input-field col s2">
+                                                <input id="duration" name="duration" type="number"
+                                                       value="${course.duration}" required>
+                                                <label for="duration">Thời lượng</label>
+                                            </div>
+                                            <div class="input-field col s2">
+                                                <input id="rating" name="rating" type="number"
+                                                       value="${course.rating}" required>
+                                                <label for="rating">Đánh giá khóa học</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input id="videoUrl" name="videoUrl" type="text"
+                                                       value="${course.videoUrl}">
+                                                <label for="videoUrl">URL Video khóa học</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                        <textarea id="description"
+                                                                  name="description"
+                                                                  class="materialize-textarea"
+                                                                  required>${course.description}</textarea>
+                                                <label for="description">Mô tả khóa học</label>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <label style="font-size:100% ">Lộ trình khóa học</label>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                        <textarea id="ccontent"
+                                                                  name="content"
+                                                                  class="materialize-textarea"
+                                                                  required>${course.content}</textarea>
+                                            </div>
+                                        </div>
+                                        <label style="font-size:100% ">Yêu cầu trình độ</label>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                        <textarea id="requirement"
+                                                                  name="requirement"
+                                                                  class="materialize-textarea"
+                                                                  required>${course.requirement}</textarea>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <input type="checkbox" id="enabled" name="enabled">
+                                                <label for="enabled">Kích hoạt</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <button class="btn cyan waves-effect waves-light right"
+                                                        type="submit" name="action"
+                                                        onclick="getType(); return confirm('Lưu thông tin khóa học?')">
+                                                    Submit
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form:form>

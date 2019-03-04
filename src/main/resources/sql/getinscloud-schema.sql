@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS getinscloud;
-CREATE DATABASE getinscloud;
+CREATE DATABASE getinscloud DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 -- CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci;
-USE getinsvn;
+USE getinscloud;
 
 create table image
 (
@@ -49,7 +49,7 @@ CREATE TABLE role
   description NVARCHAR(4000),
   enabled     BIT DEFAULT 1
 );
-
+# DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci
 CREATE TABLE user_role
 (
   user_id INT NOT NULL,

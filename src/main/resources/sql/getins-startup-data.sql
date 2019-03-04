@@ -1,3 +1,4 @@
+USE getinscloud;
 /* ADMIN ACCOUNT */
 INSERT INTO user
   (user_name, password, email, avatar, enabled)
@@ -8,15 +9,15 @@ VALUES ( 'chaulong78', '$2a$10$3LyhIrcZqN0bnPpt7E5z/u97ZPrnMlfA9XQlhv2xwABHmNPZl
 
 insert into user_detail
   (user_id, full_name, birth_date, gender, address, phone, job)
-values (1, 'Phạm Châu Long', '1997-8-7', 1, 'Hà Nội', '0943394172', 'Sinh viên');
+values (1, N'Phạm Châu Long', '1997-8-7', 1, N'Hà Nội', '0943394172', N'Sinh viên');
 
 /* ROLE */
 INSERT INTO role
 (name, description, enabled)
-VALUES ('ROLE_ADMIN', 'Quản trị viên', 1),
-       ('ROLE_USER', 'Người dùng', 1),
-       ('ROLE_MANAGER', 'Quản lý chung', 1),
-       ('ROLE_POSTER', 'Quản lý sự kiện, bài viết', 1);
+VALUES ('ROLE_ADMIN', N'Quản trị viên', 1),
+       ('ROLE_USER', N'Người dùng', 1),
+       ('ROLE_MANAGER', N'Quản lý chung', 1),
+       ('ROLE_POSTER', N'Quản lý sự kiện, bài viết', 1);
 
 INSERT INTO user_role (user_id, role_id)
 VALUES (1, 1);
@@ -24,35 +25,35 @@ VALUES (1, 1);
 /* Chức năng */
 insert into app_function
 (id, name, url, icon, parent_id)
-values ('AccountInfo', 'Tài khoản cá nhân', null, 'account_box', null),
-       ('Profile', 'Thông tin cá nhân', '/admin/info/profile', 'keyboard_arrow_right', 'AccountInfo'),
-       ('ChangePassword', 'Đổi mật khẩu', '/admin/info/change-password', 'keyboard_arrow_right', 'AccountInfo'),
+values ('AccountInfo', N'Tài khoản cá nhân', null, 'account_box', null),
+       ('Profile', N'Thông tin cá nhân', '/admin/info/profile', 'keyboard_arrow_right', 'AccountInfo'),
+       ('ChangePassword', N'Đổi mật khẩu', '/admin/info/change-password', 'keyboard_arrow_right', 'AccountInfo'),
 
-       ('SystemManagement', 'Quản lý hệ thống', null, 'settings', null),
-       ('FunctionList', 'Danh sách chức năng', '/admin/system/function', 'keyboard_arrow_right', 'SystemManagement'),
-       ('RoleList', 'Danh sách quyền', '/admin/system/role', 'keyboard_arrow_right', 'SystemManagement'),
+       ('SystemManagement', N'Quản lý hệ thống', null, 'settings', null),
+       ('FunctionList', N'Danh sách chức năng', '/admin/system/function', 'keyboard_arrow_right', 'SystemManagement'),
+       ('RoleList', N'Danh sách quyền', '/admin/system/role', 'keyboard_arrow_right', 'SystemManagement'),
 
-       ('UserManagement', 'Quản lý người dùng', null, 'group', null),
-       ('UserList', 'Danh sách người dùng', '/admin/account', 'keyboard_arrow_right', 'UserManagement'),
-       ('ContactList', 'Liên hệ người dùng', '/admin/account/contact', 'keyboard_arrow_right',
+       ('UserManagement', N'Quản lý người dùng', null, 'group', null),
+       ('UserList', N'Danh sách người dùng', '/admin/account', 'keyboard_arrow_right', 'UserManagement'),
+       ('ContactList', N'Liên hệ người dùng', '/admin/account/contact', 'keyboard_arrow_right',
         'UserManagement'),
 
-       ('CourseManagement', 'Quản lý khóa học', null, 'book', null),
-       ('CourseList', 'Danh sách khóa học', '/admin/course', 'keyboard_arrow_right', 'CourseManagement'),
-       ('CourseTypeList', 'Thể loại khóa học', '/admin/course/type', 'keyboard_arrow_right',
+       ('CourseManagement', N'Quản lý khóa học', null, 'book', null),
+       ('CourseList', N'Danh sách khóa học', '/admin/course', 'keyboard_arrow_right', 'CourseManagement'),
+       ('CourseTypeList', N'Thể loại khóa học', '/admin/course/type', 'keyboard_arrow_right',
         'CourseManagement'),
-       ('ClassList', 'Danh sách lớp học', '/admin/course/class', 'keyboard_arrow_right', 'CourseManagement'),
+       ('ClassList', N'Danh sách lớp học', '/admin/course/class', 'keyboard_arrow_right', 'CourseManagement'),
 
-       ('EventManagement', 'Quản lý sự kiện', null, 'event', null),
-       ('PostList', 'Danh sách bài viết', '/admin/event/post', 'keyboard_arrow_right', 'EventManagement'),
-       ('PostTypeList', 'Thể loại bài viết', '/admin/event/post/type', 'keyboard_arrow_right',
+       ('EventManagement', N'Quản lý sự kiện', null, 'event', null),
+       ('PostList', N'Danh sách bài viết', '/admin/event/post', 'keyboard_arrow_right', 'EventManagement'),
+       ('PostTypeList', N'Thể loại bài viết', '/admin/event/post/type', 'keyboard_arrow_right',
         'EventManagement'),
-       ('AdList', 'Danh sách quảng cáo', '/admin/event/ad', 'keyboard_arrow_right', 'EventManagement'),
-       ('ThemeManagement', 'Chỉnh sửa giao diện', '/admin/event/theme', 'keyboard_arrow_right', 'EventManagement'),
+       ('AdList', N'Danh sách quảng cáo', '/admin/event/ad', 'keyboard_arrow_right', 'EventManagement'),
+       ('ThemeManagement', N'Chỉnh sửa giao diện', '/admin/event/theme', 'keyboard_arrow_right', 'EventManagement'),
 
-       ('MediaManagement', 'Quản lý media', '/admin/media', 'image', null),
-       ('PhotoList', 'Danh sách hình ảnh', '/admin/media/photo', 'keyboard_arrow_right', 'MediaManagement'),
-       ('VideoList', 'Danh sách video', '/admin/media/video', 'keyboard_arrow_right', 'MediaManagement');
+       ('MediaManagement', N'Quản lý media', '/admin/media', 'image', null),
+       ('PhotoList', N'Danh sách hình ảnh', '/admin/media/photo', 'keyboard_arrow_right', 'MediaManagement'),
+       ('VideoList', N'Danh sách video', '/admin/media/video', 'keyboard_arrow_right', 'MediaManagement');
 
 /* ROLE FUNCTION */
 insert into role_function

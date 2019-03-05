@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 @Configuration
 public class CustomDataSource implements DataSource{
 
-    @Value("${spring.datasource.driver-class-name}")
+    @Value("${spring.datasource.driver}")
     private String driver;
 
     @Value("${spring.datasource.url}")

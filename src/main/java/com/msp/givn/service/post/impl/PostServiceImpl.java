@@ -30,6 +30,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> getNewestPost() {
+        return postRepository.getNewestPost();
+    }
+
+    @Override
     public Post findById(int id) {
         return postRepository.findById(id);
     }

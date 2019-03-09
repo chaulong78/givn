@@ -3,6 +3,7 @@ package com.msp.givn.controller.admin.course;
 import com.msp.givn.entity.CourseType;
 import com.msp.givn.service.course.CourseService;
 import com.msp.givn.service.course.CourseTypeService;
+import com.msp.givn.utility.StringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -43,6 +44,7 @@ public class CourseTypeEditController {
 
         if (!result.hasErrors()) {
             if (String.valueOf(type.getId()) != null && type.getId() != 0) {
+                type.setUrlName("/danh-muc/" + StringFunction.convertNameToUrl(type.getName()));
                 typeService.save(type);
                 redirectAttributes.addFlashAttribute("message", "Cập nhật thể loại thành công");
                 return modelAndView;
@@ -60,11 +62,11 @@ public class CourseTypeEditController {
 
         if (id != null) {
             if (typeService.findById(id) != null) {
-                if (id == 1) {
-                    redirectAttribute.addFlashAttribute("message", "Không thể xóa thể loại mặc định này");
-                    return modelAndView;
-                }
-                courseService.updateTypeForCourse(id);
+//                if (id == 1) {
+//                    redirectAttribute.addFlashAttribute("message", "Không thể xóa thể loại mặc định này");
+//                    return modelAndView;
+//                }
+//                courseService.updateTypeForCourse(id);
                 typeService.deleteById(id);
                 redirectAttribute.addFlashAttribute("message", "Xóa thể loại thành công");
                 return modelAndView;

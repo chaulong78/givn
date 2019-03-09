@@ -3,19 +3,20 @@ CREATE DATABASE getinsvn;
 -- CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci;
 USE getinsvn;
 
-create table image
+CREATE TABLE image
 (
-  id  INT PRIMARY KEY AUTO_INCREMENT,
-  url VARCHAR(4000)
+  id   INT PRIMARY KEY AUTO_INCREMENT,
+  size VARCHAR(250),
+  url  VARCHAR(4000)
 );
 
 CREATE TABLE contact
 (
-  id         INT PRIMARY KEY AUTO_INCREMENT,
-  name       NVARCHAR(4000),
-  birth_date DATE,
-  phone      CHAR(11),
-  email      VARCHAR(4000)
+  id      INT PRIMARY KEY AUTO_INCREMENT,
+  name    NVARCHAR(4000),
+  email   VARCHAR(4000),
+  phone   CHAR(11),
+  comment NVARCHAR(4000)
 );
 
 CREATE TABLE user
@@ -56,9 +57,11 @@ CREATE TABLE user_role
   role_id INT NOT NULL,
   PRIMARY KEY (user_id, role_id),
   CONSTRAINT FK_userRole_user FOREIGN KEY (user_id)
-    REFERENCES user (id) ON DELETE CASCADE,
+    REFERENCES user (id)
+    ON DELETE CASCADE,
   CONSTRAINT FK_userRole_role FOREIGN KEY (role_id)
-    REFERENCES role (id) ON DELETE CASCADE
+    REFERENCES role (id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE app_function
@@ -69,7 +72,8 @@ CREATE TABLE app_function
   icon      VARCHAR(4000),
   parent_id VARCHAR(50),
   CONSTRAINT FK_function_function FOREIGN KEY (parent_id)
-    REFERENCES app_function (id) ON DELETE CASCADE
+    REFERENCES app_function (id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE role_function
@@ -82,15 +86,18 @@ CREATE TABLE role_function
   can_delete  BIT DEFAULT 1,
   PRIMARY KEY (role_id, function_id),
   CONSTRAINT FK_roleFunction_role FOREIGN KEY (role_id)
-    REFERENCES role (id) ON DELETE CASCADE,
+    REFERENCES role (id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT FK_roleFunction_function FOREIGN KEY (function_id)
-    REFERENCES app_function (id) ON DELETE CASCADE
+    REFERENCES app_function (id)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE post_type
 (
   id          INT PRIMARY KEY AUTO_INCREMENT,
   name        NVARCHAR(4000) NOT NULL,
+  url_name    VARCHAR(4000)  NOT NULL,
   description NVARCHAR(4000)
 );
 
@@ -99,7 +106,10 @@ CREATE TABLE post
   id          INT PRIMARY KEY AUTO_INCREMENT,
   author_id   INT,
   type_id     INT,
-  subject     MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
+  name        MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
+  url_name    VARCHAR(4000)                                                  NOT NULL,
+  description NVARCHAR(4000),
+  image       varchar(4000),
   content     MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
   attach      VARCHAR(4000),
   create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -114,6 +124,7 @@ CREATE TABLE course_type
 (
   id          INT PRIMARY KEY AUTO_INCREMENT,
   name        NVARCHAR(255) UNIQUE NOT NULL,
+  url_name    VARCHAR(4000)        NOT NULL,
   description NVARCHAR(4000)
 );
 
@@ -123,14 +134,15 @@ CREATE TABLE course
   author_id   INT,
   type_id     INT,
   name        NVARCHAR(4000)                                                 NOT NULL,
+  url_name    VARCHAR(4000)                                                  NOT NULL,
   description MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
   content     MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
   video_url   VARCHAR(4000),
-  price       DECIMAL(15, 3) DEFAULT 0,
-  rating      DECIMAL(3, 1)  DEFAULT 0,
+  price       VARCHAR(250),
+  rating      SMALLINT DEFAULT 0,
   requirement MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI,
-  duration    INT            DEFAULT 0,
-  enabled     BIT            DEFAULT 1,
+  duration    INT      DEFAULT 0,
+  enabled     BIT      DEFAULT 1,
   CONSTRAINT FK_course_courseType FOREIGN KEY (type_id)
     REFERENCES course_type (id),
   CONSTRAINT FK_course_user FOREIGN KEY (author_id)
@@ -143,6 +155,7 @@ CREATE TABLE class
   course_id      INT,
   teacher_id     INT,
   name           NVARCHAR(4000) NOT NULL,
+  url_name       VARCHAR(4000)  NOT NULL,
   student_number TINYINT DEFAULT 0,
   description    MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI,
   begin_date     DATE,
@@ -199,3 +212,54 @@ CREATE TABLE password_reset_token
     REFERENCES user (id)
 );
 
+CREATE TABLE event
+(
+  id          INT PRIMARY KEY AUTO_INCREMENT,
+  image       VARCHAR(4000),
+  name        NVARCHAR(4000),
+  url_name    VARCHAR(4000),
+  event_time  VARCHAR(4000),
+  event_place NVARCHAR(4000),
+  description NVARCHAR(4000),
+  content     MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
+  enabled     BIT default 0,
+  map         VARCHAR(4000)
+);
+
+CREATE TABLE speaker
+(
+  id          INT PRIMARY KEY AUTO_INCREMENT,
+  name        NVARCHAR(4000),
+  image       VARCHAR(4000),
+  job         NVARCHAR(4000),
+  description NVARCHAR(4000)
+);
+
+CREATE TABLE event_speaker
+(
+  speaker_id INT NOT NULL,
+  event_id   INT NOT NULL,
+  PRIMARY KEY (speaker_id, event_id),
+  CONSTRAINT FK_eventSpeaker_speaker FOREIGN KEY (speaker_id)
+    REFERENCES speaker (id)
+    ON DELETE CASCADE,
+  CONSTRAINT FK_eventSpeaker_event FOREIGN KEY (event_id)
+    REFERENCES event (id)
+    ON DELETE CASCADE
+);
+
+DELIMITER $$
+CREATE procedure `getinsvn`.`getNewestEvent`()
+BEGIN
+  SELECT *
+  FROM event
+  WHERE enabled = 1
+    AND id =
+        (SELECT MAX(id) FROM event);
+END;
+
+DELIMITER $$
+CREATE procedure `getinsvn`.`getNewestPost`()
+BEGIN
+  SELECT * FROM post ORDER BY id DESC LIMIT 3;
+END;

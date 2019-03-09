@@ -33,7 +33,7 @@ public class EmailService {
 
             Context context = new Context();
             context.setVariables(mail.getModel());
-            String html = templateEngine.process("template/email-template", context);
+            String html = templateEngine.process("template/reset-email", context);
 
             helper.setTo(mail.getTo());
             helper.setText(html, true);
@@ -50,14 +50,14 @@ public class EmailService {
         Mail mail = new Mail();
         mail.setFrom("getinsvn@gmail.com");
         mail.setTo(user.getEmail());
-        mail.setSubject("Password reset request");
+        mail.setSubject("Get Ins - Khôi phục mật khẩu của bạn");
 
         Map<String, Object> model = new HashMap<>();
         model.put("token", token);
-        model.put("user", user);
-        model.put("signature", "GetInsVN");
+//        model.put("user", user);
+//        model.put("signature", "GetInsVN");
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-        model.put("resetUrl", url + "/reset-password?token=" + token);
+        model.put("resetUrl", url + "/reset?key=" + token);
         mail.setModel(model);
 
         return mail;

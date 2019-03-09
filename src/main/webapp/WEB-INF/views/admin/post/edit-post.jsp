@@ -87,9 +87,14 @@
                                                name="typeId">
                                         <div class="row">
                                             <div class="input-field col s6">
-                                                <input id="subject" name="subject" type="text"
-                                                       value="${post.subject}" required>
-                                                <label for="subject">Tiêu đề bài viết</label>
+                                                <input id="image" name="image" type="text"
+                                                       value="${post.image}" required>
+                                                <label for="image">Ảnh đại diện khóa học</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input id="name" name="name" type="text"
+                                                       value="${post.name}" required>
+                                                <label for="name">Tiêu đề bài viết</label>
                                             </div>
                                             <div class="input-field col s6">
                                                 <select id="select">
@@ -102,6 +107,16 @@
                                             </div>
                                         </div>
                                         <br>
+                                        <label style="font-size:100% ">Mô tả bài viết</label>
+                                        <br>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                        <textarea id="description"
+                                                                  name="description"
+                                                                  class="materialize-textarea"
+                                                                  required>${post.description}</textarea>
+                                            </div>
+                                        </div>
                                         <label style="font-size:100% ">Nội dung bài viết</label>
                                         <br>
                                         <div class="row">
@@ -162,7 +177,7 @@
 <script type="text/javascript" src="/js/plugins.js"></script>
 <script type="text/javascript" src="/js/scripts/form-file-uploads.js"></script>
 <script type="text/javascript" src="/vendors/dropify/js/dropify.min.js"></script>
-<script src="https://cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.5.4/full-all/ckeditor.js"></script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <script>
@@ -176,9 +191,9 @@
             todayHighlight: true,
             autoclose: true
         });
+        CKEDITOR.replace('description');
+        CKEDITOR.replace('ccontent');
     });
-    CKEDITOR.replace('ccontent');
-
     function getType() {
         $('#typeId').val($("#select").val());
     }

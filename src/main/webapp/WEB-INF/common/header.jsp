@@ -10,7 +10,7 @@
                     <li>
                         <h1 class = "logo-wrapper">
                             <a href = "/admin" class = "brand-logo darken-1">
-                                <img src = "/images/logo/malogin-logo.png" alt = "">
+                                <img src = "/images/logo/getins-background.png" alt = "">
                                 <span class = "logo-text hide-on-med-and-down">GetIns Vietnam</span>
                             </a>
                         </h1>

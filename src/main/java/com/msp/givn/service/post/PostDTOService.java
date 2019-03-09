@@ -6,5 +6,11 @@ import java.util.List;
 
 public interface PostDTOService {
 
-     List<PostDTO> findAll();
+    List<PostDTO> findAll();
+
+    List<PostDTO> findAllWithOutContent();
+
+    List<PostDTO> findByTypeUrl(String url);
+
+    PostDTO findByUrlName(String urlName);
 }

@@ -2,6 +2,7 @@ package com.msp.givn.controller.admin.course;
 
 import com.msp.givn.entity.CourseType;
 import com.msp.givn.service.course.CourseTypeService;
+import com.msp.givn.utility.StringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -46,6 +47,7 @@ public class CourseTypeController {
                 modelAndView.setViewName("redirect:/admin/course/type/add");
                 redirectAttributes.addFlashAttribute("message", "Tên thể loại đã tồn tại");
             } else {
+                type.setUrlName("/danh-muc/" + StringFunction.convertNameToUrl(type.getName()));
                 typeService.save(type);
                 redirectAttributes.addFlashAttribute("message", "Tạo thể loại khóa học mới thành công");
             }

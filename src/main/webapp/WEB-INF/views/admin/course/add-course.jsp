@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+6<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -79,32 +79,31 @@
                                         <input type="hidden" value="${course.typeId}" id="typeId"
                                                name="typeId">
                                         <div class="row">
-                                            <div class="col s4 m4 14">
-                                                <input type="file" id="file" name="file" class="dropify"
-                                                       data-default-file=""/>
+                                            <div class="input-field col s8">
+                                                <input id="image" name="image" type="text"
+                                                       value="${course.image}" required>
+                                                <label for="image">Ảnh đại diện khóa học</label>
                                             </div>
-                                            <div class="row">
-                                                <div class="input-field col s7">
-                                                    <input id="name" name="name" type="text"
-                                                           value="${course.name}" required>
-                                                    <label for="name">Tên khóa học</label>
-                                                </div>
-                                                <div class="input-field col s7">
-                                                    <select id="select">
-                                                        <c:forEach var="type" items="${typeList}">
-                                                            <option value="${type.id}"
-                                                                    ${type.id == 1?'selected':''}}>${type.name}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                    <label>Thể loại khóa học</label>
-                                                </div>
+                                            <div class="input-field col s8">
+                                                <input id="name" name="name" type="text"
+                                                       value="${course.name}" required>
+                                                <label for="name">Tên khóa học</label>
+                                            </div>
+                                            <div class="input-field col s8">
+                                                <select id="select">
+                                                    <c:forEach var="type" items="${typeList}">
+                                                        <option value="${type.id}"
+                                                                ${type.id == 1?'selected':''}}>${type.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                                <label>Thể loại khóa học</label>
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="input-field col s2">
-                                                <input id="price" name="price" type="number"
-                                                       value="${course.price}" required>
+                                                <input id="price" name="price" type="text"
+                                                       value="${course.price}" required placeholder="Ví dụ: 2.200.00">
                                                 <label for="price">Giá khóa học</label>
                                             </div>
                                             <div class="input-field col s2">
@@ -123,13 +122,13 @@
                                                 <label for="videoUrl">URL Video khóa học</label>
                                             </div>
                                         </div>
+                                        <label style="font-size:100% ">Mô tả và mục tiêu</label>
                                         <div class="row">
                                             <div class="input-field col s12">
                                                         <textarea id="description"
                                                                   name="description"
                                                                   class="materialize-textarea"
                                                                   required>${course.description}</textarea>
-                                                <label for="description">Mô tả khóa học</label>
                                             </div>
                                         </div>
                                         <br>
@@ -189,6 +188,7 @@
 <script type="text/javascript" src="/vendors/dropify/js/dropify.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
 <script>
+    CKEDITOR.replace('description');
     CKEDITOR.replace('ccontent');
     CKEDITOR.replace('requirement');
 

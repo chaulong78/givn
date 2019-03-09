@@ -4,6 +4,7 @@ import com.msp.givn.entity.Post;
 import com.msp.givn.entity.PostType;
 import com.msp.givn.service.post.PostService;
 import com.msp.givn.service.post.PostTypeService;
+import com.msp.givn.utility.StringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -56,13 +57,14 @@ public class PostEditController {
 
             if (objectId != null) {
                 setEnabled(post, checkBox);
+                post.setUrlName("/tin-tuc/" +StringFunction.convertNameToUrl(post.getName()));
                 postService.save(post);
-                message = "Sửa khóa học thành công";
+                message = "Sửa thể loại thành công";
             } else {
-                message = "Khóa học không tồn tại";
+                message = "Thể loại không tồn tại";
             }
         } else {
-            message = "Sửa khóa học thất bại";
+            message = "Sửa thể loại thất bại";
         }
 
         redirectAttributes.addFlashAttribute("message", message);

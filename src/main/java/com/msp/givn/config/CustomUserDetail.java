@@ -33,7 +33,6 @@ public class CustomUserDetail extends org.springframework.security.core.userdeta
         this.avatar = avatar;
     }
 
-
     public int getUserId() {
         return userId;
     }
@@ -65,4 +64,6 @@ public class CustomUserDetail extends org.springframework.security.core.userdeta
     public void setFunctionDTOList(List<FunctionDTO> functionDTOList) {
         this.functionDTOList = functionDTOList;
     }
+
+
 }

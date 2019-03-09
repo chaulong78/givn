@@ -7,6 +7,7 @@ import com.msp.givn.entity.PostType;
 import com.msp.givn.service.post.PostDTOService;
 import com.msp.givn.service.post.PostService;
 import com.msp.givn.service.post.PostTypeService;
+import com.msp.givn.utility.StringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -64,6 +65,7 @@ public class PostController {
             addAuthorAndDateForPost(post);
             setEnable(post, checkBox);
 
+            post.setUrlName("/tin-tuc/" + StringFunction.convertNameToUrl(post.getName()));
             postService.save(post);
             redirectAttributes.addFlashAttribute("message", "Tạo bài viết thành công");
         } else {

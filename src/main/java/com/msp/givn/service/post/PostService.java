@@ -12,6 +12,8 @@ public interface PostService {
 
     List<Post> findByTypeId(int id);
 
+    List<Post> getNewestPost();
+
     Post findById(int id);
 
     String findNameById(int id);

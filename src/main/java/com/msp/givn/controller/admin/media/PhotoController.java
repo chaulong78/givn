@@ -30,7 +30,6 @@ public class PhotoController {
     public ModelAndView showAllPhoto() {
         ModelAndView modelAndView = new ModelAndView("admin/photo/table-photo");
         List<Image> imageList = imageService.findAll();
-
         modelAndView.addObject("imageList", imageList);
         return modelAndView;
     }

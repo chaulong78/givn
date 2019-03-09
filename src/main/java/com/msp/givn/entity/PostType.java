@@ -17,6 +17,9 @@ public class PostType {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "url_name")
+    private String urlName;
+
     @Column(name = "description")
     private String description;
 }

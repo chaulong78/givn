@@ -10,11 +10,7 @@ public class PasswordChangeDTO {
 
     private String oldPassword;
 
-    @NotEmpty
-    @NotNull
     private String password;
 
-    @NotEmpty
-    @NotNull
     private String passwordAgain;
 }

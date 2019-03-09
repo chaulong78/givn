@@ -29,7 +29,7 @@ public class ProfileDTODaoImpl implements ProfileDTODao {
         try {
             connection = dataSource.getConnection();
             preState = connection.prepareCall(
-                    "SELECT U.user_name, U.email, UD.full_name, UD.birth_date, UD.gender, UD.address, UD.phone, UD.job FROM user AS U JOIN user_detail AS UD ON U.id = UD.user_id WHERE U.id = ?;");
+                    "SELECT U.user_name, U.email, U.avatar, UD.full_name, UD.birth_date, UD.gender, UD.address, UD.phone, UD.job FROM user AS U JOIN user_detail AS UD ON U.id = UD.user_id WHERE U.id = ?;");
 
             preState.setInt(1, id);
             rs = preState.executeQuery();
@@ -39,6 +39,7 @@ public class ProfileDTODaoImpl implements ProfileDTODao {
 
                 profileDTO.setUserName(rs.getString("user_name"));
                 profileDTO.setEmail(rs.getString("email"));
+                profileDTO.setAvatar(rs.getString("avatar"));
                 profileDTO.setFullName(rs.getString("full_name"));
                 profileDTO.setBirthDate(rs.getDate("birth_date"));
                 profileDTO.setGender(rs.getBoolean("gender"));

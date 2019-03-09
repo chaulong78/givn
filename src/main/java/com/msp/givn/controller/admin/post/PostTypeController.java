@@ -2,6 +2,7 @@ package com.msp.givn.controller.admin.post;
 
 import com.msp.givn.entity.PostType;
 import com.msp.givn.service.post.PostTypeService;
+import com.msp.givn.utility.StringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -46,7 +47,8 @@ public class PostTypeController {
                 modelAndView.setViewName("redirect:/admin/event/post/type/add");
                 redirectAttributes.addFlashAttribute("message", "Tên thể loại đã tồn tại");
             } else {
-                typeService.save(type).getName();
+                type.setUrlName("/danh-muc-tin/" +StringFunction.convertNameToUrl(type.getName()));
+                typeService.save(type);
                 redirectAttributes.addFlashAttribute("message", "Tạo thể loại bài viết mới thành công");
             }
         } else {

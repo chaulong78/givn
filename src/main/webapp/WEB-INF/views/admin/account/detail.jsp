@@ -118,11 +118,11 @@
                                         <div class="row">
                                             <div class="input-field col s6">
                                                 <select id="gender" name="gender">
-                                                    <c:if test="${profileDTO.gender == false}">
+                                                    <c:if test="${profileDTO.gender == true}">
                                                         <option value="0" selected disabled="disabled">Nam</option>
                                                         <option value="1" disabled="disabled">Nữ</option>
                                                     </c:if>
-                                                    <c:if test="${profileDTO.gender == true}">
+                                                    <c:if test="${profileDTO.gender == false}">
                                                         <option value="0" disabled="disabled">Nam</option>
                                                         <option value="1" selected disabled="disabled">Nữ</option>
                                                     </c:if>

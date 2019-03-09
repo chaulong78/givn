@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -24,16 +25,19 @@ public class ContactUserController {
         return modelAndView;
     }
 
-    @PostMapping("/contact/submit")
-    public void saveContact(@ModelAttribute("contact") ContactUser contact) {
+    @PostMapping("/contact")
+    public String saveContact(@ModelAttribute("contact") ContactUser contact, HttpServletRequest request) {
         if (contact != null) {
             contactService.save(contact);
         }
+
+        System.out.println();
+        return "redirect:" + request.getHeader("referer");
     }
 
     @GetMapping("/admin/account/contact/delete")
     public ModelAndView deleteContact(@RequestParam(value = "id", required = false) Integer id) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/admin/system/contact");
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/account/contact");
         if (id != null) {
             contactService.deleteById(id);
         }

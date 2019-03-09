@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import javax.sql.DataSource;
@@ -71,6 +73,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return authenticationProvider;
     }
 
+    @Bean
+    public HttpFirewall defaultHttpFirewall() {
+        return new DefaultHttpFirewall();
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) {
@@ -103,7 +109,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register", "/register/*"
                         , "/forgot-password", "/forgot-password/*"
                         , "/reset-password", "/reset-password/*").anonymous()
-                .antMatchers("/*").permitAll();
+                .antMatchers( "/", "/*").permitAll();
 
         http.authorizeRequests().and().formLogin()
                 .loginPage("/login")

@@ -18,12 +18,12 @@ public class ContactUser {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "birth_date")
-    private Date birthDate;
-
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "comment")
+    private String comment;
 }

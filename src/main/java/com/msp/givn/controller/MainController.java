@@ -1,6 +1,16 @@
 package com.msp.givn.controller;
 
-import com.msp.givn.service.media.FlickrService;
+import com.msp.givn.dto.CourseDTO;
+import com.msp.givn.entity.CourseType;
+import com.msp.givn.entity.Event;
+import com.msp.givn.entity.Post;
+import com.msp.givn.entity.PostType;
+import com.msp.givn.service.course.CourseDTOService;
+import com.msp.givn.service.course.CourseTypeService;
+import com.msp.givn.service.event.EventService;
+import com.msp.givn.service.post.PostService;
+import com.msp.givn.service.post.PostTypeService;
+import com.msp.givn.utility.StringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,7 +19,6 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -24,35 +33,36 @@ public class MainController {
     private PersistentTokenRepository persistentTokenRepository;
 
     @Autowired
-    private FlickrService flickrService;
+    private CourseDTOService courseDTOService;
 
-    @GetMapping(value = "/admin")
-    public String showAdminPage() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String role = ((List<GrantedAuthority>) auth.getAuthorities()).get(0).toString();
+    @Autowired
+    private PostService postService;
 
-        if ("ROLE_ADMIN".equals(role) || "ROLE_MANAGER".equals(role) || "ROLE_POSTER".equals(role)) {
-            return "admin/home";
-        }
-        return "redirect:/";
-    }
+    @Autowired
+    private EventService eventService;
 
-    @GetMapping(value = "/")
-    public String showHomePage() {
-        return "web/home";
-    }
+    @Autowired
+    private PostTypeService postTypeService;
+
+    @Autowired
+    private CourseTypeService courseTypeService;
+
 
     @GetMapping(value = "/login")
-    public ModelAndView showLoginForm(@ModelAttribute("message") String message) {
-        ModelAndView modelAndView = new ModelAndView("login-form");
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String role = ((List<GrantedAuthority>) auth.getAuthorities()).get(0).toString();
+    public ModelAndView showLoginForm() {
+        ModelAndView modelAndView = new ModelAndView("web/login");
+        List<GrantedAuthority> authList = ((List<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        String role = authList.get(0).toString();
 
         if (!("ROLE_ANONYMOUS".equals(role))) {
             modelAndView.setViewName("redirect:/");
         }
 
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
         return modelAndView;
     }
 
@@ -76,20 +86,155 @@ public class MainController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
 
-        return "redirect:/login?logout";
+        return "redirect:/";
     }
 
-    @GetMapping(value = "/admin/statistic")
-    public String showStatisticPage() {
-        return "admin/statistic/view";
+    @GetMapping(value = "/admin")
+    public String showAdminPage() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = ((List<GrantedAuthority>) auth.getAuthorities()).get(0).toString();
+
+        if ("ROLE_ADMIN".equals(role) || "ROLE_MANAGER".equals(role) || "ROLE_POSTER".equals(role)) {
+            return "admin/home";
+        }
+        return "redirect:/";
     }
 
-    @PostMapping(value = "/upload")
-    public String testUploadMulti(@RequestParam(value = "file", required = false) MultipartFile[] files, HttpServletRequest request) {
+    @GetMapping(value = {"", "/"})
+    public ModelAndView showHomePage() {
+        ModelAndView modelAndView = new ModelAndView("web/home");
+        List<CourseDTO> courseList = courseDTOService.findAll();
+        modelAndView.addObject("courseList", courseList);
 
-        List<String> urlList = flickrService.uploadPhotoMulti(request, files);
-        System.out.println(urlList);
+        List<Post> postList = postService.getNewestPost();
+        modelAndView.addObject("postList", postList);
 
-        return null;
+        Event event = eventService.getNewestEvent();
+        modelAndView.addObject("event", event);
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/404")
+    public ModelAndView handleResourceNotFoundException() {
+        ModelAndView modelAndView = new ModelAndView("web/404");
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/tim-kiem")
+    public ModelAndView findByName(@RequestParam(value = "khoa-hoc", required = false) String name) {
+        ModelAndView modelAndView = new ModelAndView("web/courses");
+        modelAndView.addObject("key", name);
+
+        name = StringFunction.convertNameToUrl(name);
+
+        if (name!=null){
+            List<CourseDTO> courseList = courseDTOService.findMultiByUrlName(name);
+            if (courseList.size() > 0) {
+                modelAndView.addObject("courseList", courseList);
+            }
+        }
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/about-us")
+    public ModelAndView aboutUs(){
+        ModelAndView modelAndView = new ModelAndView("web/about");
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/lien-he")
+    public ModelAndView contactUs(){
+        ModelAndView modelAndView = new ModelAndView("web/contact");
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/danh-cho-hoc-vien")
+    public ModelAndView forStudent(){
+        ModelAndView modelAndView = new ModelAndView("web/for-student");
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/chinh-sach")
+    public ModelAndView securityPolicy(){
+        ModelAndView modelAndView = new ModelAndView("web/policy");
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/dieu-khoan")
+    public ModelAndView termsOfUse(){
+        ModelAndView modelAndView = new ModelAndView("web/term");
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/giao-dich")
+    public ModelAndView transaction(){
+        ModelAndView modelAndView = new ModelAndView("web/transaction");
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/tuyen-dung")
+    public ModelAndView recruit(){
+        ModelAndView modelAndView = new ModelAndView("web/recruitment");
+
+        /*For menu*/
+        List<CourseType> courseTypeList = courseTypeService.findAll();
+        modelAndView.addObject("courseTypeList", courseTypeList);
+        List<PostType> postTypeList = postTypeService.findAll();
+        modelAndView.addObject("postTypeList", postTypeList);
+        return modelAndView;
     }
 }

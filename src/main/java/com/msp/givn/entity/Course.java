@@ -23,6 +23,9 @@ public class Course {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "url_name")
+    private String urlName;
+
     @Column(name = "image")
     private String image;
 
@@ -36,10 +39,10 @@ public class Course {
     private String videoUrl;
 
     @Column(name = "price")
-    private double price;
+    private String price;
 
     @Column(name = "rating")
-    private double rating;
+    private int rating;
 
     @Column(name = "requirement")
     private String requirement;
@@ -49,4 +52,5 @@ public class Course {
 
     @Column(name = "enabled")
     private boolean enabled;
+
 }

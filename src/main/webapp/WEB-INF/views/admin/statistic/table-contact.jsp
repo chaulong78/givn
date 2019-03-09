@@ -72,9 +72,9 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Tên</th>
-                                        <th>Tuổi</th>
                                         <th>SĐT</th>
                                         <th>Email</th>
+                                        <th>Bình luận</th>
                                         <th>#</th>
                                     </tr>
                                     </thead>
@@ -82,9 +82,9 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Tên</th>
-                                        <th>Ngày sinh</th>
                                         <th>SĐT</th>
                                         <th>Email</th>
+                                        <th>Bình luận</th>
                                         <th>#</th>
                                     </tr>
                                     </tfoot>
@@ -93,14 +93,14 @@
                                         <tr>
                                             <td><b>${contact.id}</b></td>
                                             <td><b>${contact.name}</b></td>
-                                            <td><b>${contact.birthDate}</b></td>
                                             <td><b>${contact.phone}</b></td>
                                             <td><b>${contact.email}</b></td>
+                                            <td><b>${contact.comment}</b></td>
                                             <td>
                                                 <c:if test="${currentFunction.canDelete}">
                                                     <a href="${pageContext.request.contextPath}/admin/account/contact/delete?id=${contact.id}"
                                                        class="btn waves-effect waves-light gradient-45deg-purple-deep-orange"
-                                                       onclick="return confirm('Xóa bài viết?')">
+                                                       onclick="return confirm('Xóa liên hệ?')">
                                                         Xóa
                                                     </a>
                                                 </c:if>

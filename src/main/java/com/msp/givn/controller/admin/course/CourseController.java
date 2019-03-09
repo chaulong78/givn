@@ -8,6 +8,7 @@ import com.msp.givn.service.course.CourseService;
 import com.msp.givn.service.course.CourseTypeService;
 import com.msp.givn.service.media.FlickrService;
 import com.msp.givn.service.user.UserService;
+import com.msp.givn.utility.StringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -35,9 +36,6 @@ public class CourseController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private FlickrService flickrService;
-
     @GetMapping(value = "")
     public ModelAndView showCourseTable() {
         ModelAndView modelAndView = new ModelAndView("admin/course/table-course");
@@ -62,10 +60,8 @@ public class CourseController {
     public ModelAndView processCreateCourse(
             @ModelAttribute("course") Course course
             , @RequestParam(value = "enabled", required = false) String checkBox
-            , @RequestParam(value = "file", required = false) MultipartFile file
             , BindingResult result
-            , RedirectAttributes redirectAttributes
-            , HttpServletRequest request) {
+            , RedirectAttributes redirectAttributes) {
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/course");
 
         if (!result.hasErrors()) {
@@ -80,10 +76,7 @@ public class CourseController {
                 course.setTypeId(1);
             }
 
-            if (!"".equals(file.getOriginalFilename())) {
-                course.setImage(flickrService.uploadPhoto(request, file));
-            }
-
+            course.setUrlName("/khoa-hoc/" + StringFunction.convertNameToUrl(course.getName()));
             courseService.save(course);
             redirectAttributes.addFlashAttribute("message", "Tạo khóa học mới thành công");
             return modelAndView;
@@ -92,4 +85,5 @@ public class CourseController {
         redirectAttributes.addFlashAttribute("message", "Tạo khóa học mới thất bại");
         return modelAndView;
     }
+
 }

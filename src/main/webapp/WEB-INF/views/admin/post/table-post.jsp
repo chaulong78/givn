@@ -102,7 +102,7 @@
                                     <c:forEach var="post" items="${postList}">
                                         <tr>
                                             <td><b>${post.id}</b></td>
-                                            <td><b>${post.subject}</b></td>
+                                            <td><b>${post.name}</b></td>
                                             <td><b>${post.typeName}</b></td>
                                             <td><b>${post.authorName}</b></td>
                                             <td><b>${post.createDate}</b></td>

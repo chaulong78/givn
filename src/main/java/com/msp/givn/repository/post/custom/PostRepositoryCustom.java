@@ -7,4 +7,6 @@ import java.util.List;
 public interface PostRepositoryCustom {
 
     void updateList(List<Post> list);
+
+    List<Post> getNewestPost();
 }

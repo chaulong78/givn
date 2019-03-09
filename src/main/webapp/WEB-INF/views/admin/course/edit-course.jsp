@@ -80,18 +80,18 @@
                                         <input type="hidden" name="id" value="${course.id}">
                                         <input type="hidden" name="authorId" value="${course.authorId}">
                                         <input type="hidden" id="typeId" value="${course.typeId}" name="typeId">
-                                        <input type="hidden" id="image" value="${course.image}" name="image">
                                         <div class="row">
-                                            <div class="col s3 m4 15">
+                                            <div class="col s4 m5 14">
                                                 <img src="${course.image}"
                                                      alt="Avatar"
                                                      class="ct-square responsive-img valign profile-image cyan">
                                             </div>
-                                            <div class="col s4 m2 14">
-                                                <input type="file" id="file" name="file" class="dropify"
-                                                       data-default-file=""/>
-                                            </div>
                                             <div class="row">
+                                                <div class="input-field col s6">
+                                                    <input id="image" name="image" type="text"
+                                                           value="${course.image}" required>
+                                                    <label for="image">Ảnh đại diện khóa học</label>
+                                                </div>
                                                 <div class="input-field col s6">
                                                     <input id="name" name="name" type="text"
                                                            value="${course.name}" required>
@@ -112,11 +112,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <br>
                                         <div class="row">
                                             <div class="input-field col s2">
-                                                <input id="price" name="price" type="number"
-                                                       value="${course.price}" required>
+                                                <input id="price" name="price" type="text"
+                                                       value="${course.price}" required placeholder="Ví dụ: 2.200.00">
                                                 <label for="price">Giá khóa học</label>
                                             </div>
                                             <div class="input-field col s2">
@@ -135,13 +134,13 @@
                                                 <label for="videoUrl">URL Video khóa học</label>
                                             </div>
                                         </div>
+                                        <label style="font-size:100% ">Mô tả và mục tiêu</label>
                                         <div class="row">
                                             <div class="input-field col s12">
                                                         <textarea id="description"
                                                                   name="description"
                                                                   class="materialize-textarea"
                                                                   required>${course.description}</textarea>
-                                                <label for="description">Mô tả khóa học</label>
                                             </div>
                                         </div>
                                         <br>
@@ -204,6 +203,7 @@
     $(document).ready(function () {
         $("#enabled").attr('checked', ${course.enabled})
     });
+    CKEDITOR.replace('description');
     CKEDITOR.replace('ccontent');
     CKEDITOR.replace('requirement');
 

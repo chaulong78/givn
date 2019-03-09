@@ -43,10 +43,31 @@ public class FlickrServiceImpl implements FlickrService {
         return urlPhoto;
     }
 
+    private void deleteLocalPhoto(MultipartFile file, HttpServletRequest request) {
+        String uploadRootPath = request.getServletContext().getRealPath("media");
+        String pathNoCom = uploadRootPath + "\\" + file.getOriginalFilename();
+        File file1 = new File(pathNoCom);
+        file1.delete();
+    }
+
+    private void deleteMultiLocalPhoto(MultipartFile[] files, HttpServletRequest request) {
+        String uploadRootPath = request.getServletContext().getRealPath("media");
+        String path = null;
+        File file = null;
+
+        for (MultipartFile mf : files) {
+            path = uploadRootPath + "\\" + mf.getOriginalFilename();
+            file = new File(path);
+            file.delete();
+        }
+    }
+
+
     @Override
     public List<String> uploadPhotoMulti(HttpServletRequest request, MultipartFile[] files) {
         HashMap<String, InputStream> streamList = localUploadDAO.doLocalMulti(request, files);
         List<String> urlList = savePhotoMulti(streamList);
+        deleteMultiLocalPhoto(files, request);
         return urlList;
     }
 
@@ -80,14 +101,5 @@ public class FlickrServiceImpl implements FlickrService {
     @Override
     public void delete(String photoId) {
         flickrDAO.delete(photoId);
-    }
-
-    private void deleteLocalPhoto(MultipartFile file, HttpServletRequest request) {
-        String uploadRootPath = request.getServletContext().getRealPath("media");
-        String pathNoCom = uploadRootPath + "\\" + file.getOriginalFilename();
-//        String pathCom = uploadRootPath + "\\comp_" + file.getOriginalFilename();
-
-        File file1 = new File(pathNoCom);
-        file1.delete();
     }
 }

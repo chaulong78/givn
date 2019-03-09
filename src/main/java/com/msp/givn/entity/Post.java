@@ -20,8 +20,17 @@ public class Post {
     @Column(name = "type_id")
     private int typeId;
 
-    @Column(name = "subject")
-    private String subject;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "url_name")
+    private String urlName;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "image")
+    private String image;
 
     @Column(name = "content")
     private String content;

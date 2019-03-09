@@ -21,12 +21,12 @@
                         <div class="login--form">
                             <div class="form-group">
                                 <label for="username">Tên đăng nhập</label>
-                                <input id="username" name="username" type="text" class="text_field">
+                                <input id="username" name="username" type="text" class="text_field" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="password">Mật khẩu</label>
-                                <input id="password" name="password" type="password" class="text_field">
+                                <input id="password" name="password" type="password" class="text_field" required>
                             </div>
 
                             <div class="form-group">
@@ -42,9 +42,9 @@
                             <button class="btn btn--md btn--round" type="submit">Đăng nhập</button>
 
                             <div class="login_assist">
-                                <a href="/forgot-pass">
+                                <a href="${pageContext.request.contextPath}/forgot-pass">
                                     <p class="recover">Quên mật khẩu?</p></a>
-                                <a href="/signup">
+                                <a href="${pageContext.request.contextPath}/signup">
                                     <p class="signup">Chưa có tài khoản?</p></a>
                             </div>
                         </div>

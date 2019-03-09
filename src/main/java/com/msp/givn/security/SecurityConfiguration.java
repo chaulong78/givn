@@ -92,23 +92,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/info", "/admin/info/", "/admin/info/*").hasAnyRole("ADMIN", "MANAGER", "POSTER")
-
-                .antMatchers("/admin/account", "/admin/account/", "/admin/account/*"
-                        , "/admin/system/contact", "/admin/system/contact/", "/admin/system/contact/*").hasAnyRole("MANAGER", "ADMIN")
-
+                .antMatchers("/admin/account", "/admin/account/", "/admin/account/*").hasAnyRole("MANAGER", "ADMIN", "POSTER")
                 .antMatchers("/admin/system", "/admin/system/", "/admin/system/*", "/admin/system/*/*").hasRole("ADMIN")
-
                 .antMatchers("/admin/course", "/admin/course/", "/admin/course/*", "/admin/course/*/*").hasAnyRole("ADMIN", "MANAGER")
-
-                .antMatchers("/admin/post", "/admin/post/", "/admin/post/*", "/admin/post/*/*").hasAnyRole("ADMIN", "MANAGER", "POSTER")
-
+                .antMatchers("/admin/event", "/admin/event/", "/admin/event/*", "/admin/event/*/*", "/admin/event/*/*/*").hasAnyRole("ADMIN", "MANAGER", "POSTER")
+                .antMatchers("/admin/media", "/admin/media/", "/admin/media/*/*").hasAnyRole("ADMIN", "MANAGER", "POSTER")
                 .antMatchers("/admin", "/admin/*", "/admin/*/*"
                         , "/admin/*/*/*", "/admin/*/*/*/*", "/admin/*/*/*/*/*").hasAnyRole("ADMIN", "MANAGER", "POSTER")
 
-                .antMatchers("/register", "/register/*"
-                        , "/forgot-password", "/forgot-password/*"
-                        , "/reset-password", "/reset-password/*").anonymous()
+                .antMatchers("/signup", "/signup/*"
+                        , "/forgot-pass", "/forgot-pass/*"
+                        , "/reset-pass", "/reset-pass/*").anonymous()
                 .antMatchers( "/", "/*").permitAll();
 
         http.authorizeRequests().and().formLogin()
@@ -121,7 +115,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().and().rememberMe()
                 .tokenRepository(this.persistentTokenRepository())
-                .tokenValiditySeconds(1 * 24 * 60 * 60).and().exceptionHandling().accessDeniedPage("/404.jsp");
+                .tokenValiditySeconds(1 * 24 * 60 * 60).and().exceptionHandling().accessDeniedPage("/web/404.jsp");
 
         http.logout()
                 .logoutUrl("/logout")

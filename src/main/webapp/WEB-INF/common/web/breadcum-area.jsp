@@ -9,44 +9,44 @@
                 <div class="breadcrumb">
                     <ul>
                         <li>
-                            <a href="/">Trang chủ</a>
+                            <a href="${pageContext.request.contextPath}/">Trang chủ</a>
                         </li>
                         <c:set var="current" value="${requestScope['javax.servlet.forward.request_uri']}"/>
                         <c:choose>
                             <c:when test="${current == '/khoa-hoc/' || current == '/khoa-hoc'}">
                                 <li class="active">
-                                    <a href="/khoa-hoc">Khóa học</a>
+                                    <a href="${pageContext.request.contextPath}/khoa-hoc">Khóa học</a>
                                 </li>
                                 <c:set var="title" value="Tất cả khóa học"/>
                             </c:when>
                             <c:when test="${current == '/tin-tuc/' || current == '/tin-tuc'}">
                                 <li class="active">
-                                    <a href="/tin-tuc">Tin tức</a>
+                                    <a href="${pageContext.request.contextPath}/tin-tuc">Tin tức</a>
                                 </li>
                                 <c:set var="title" value="Tất cả tin tức"/>
                             </c:when>
                             <c:when test="${current == '/su-kien/' || current == '/su-kien'}">
                                 <li class="active">
-                                    <a href="/su-kien">Sự kiện</a>
+                                    <a href="${pageContext.request.contextPath}/su-kien">Sự kiện</a>
                                 </li>
                                 <c:set var="title" value="Tất cả sự kiện"/>
                             </c:when>
                             <c:when test="${fn:contains(current, '/tim-kiem')}">
                                 <li class="active">
-                                    <a href="/khoa-hoc/">Khóa học</a>
+                                    <a href="${pageContext.request.contextPath}/khoa-hoc/">Khóa học</a>
                                 </li>
                                 <c:set var="title" value="Tìm kiếm từ khóa: ${key}"/>
                             </c:when>
                             <c:when test="${current == '/about-us/' || current == '/about-us'}">
                                 <li class="active">
-                                    <a href="/about-us">Về chúng tôi</a>
+                                    <a href="${pageContext.request.contextPath}/about-us">Về chúng tôi</a>
                                 </li>
                             </c:when>
                             <c:otherwise>
                                 <c:choose>
                                     <C:when test="${fn:contains(current, '/danh-muc/')}">
                                         <li>
-                                            <a href="/khoa-hoc">Khóa học</a>
+                                            <a href="${pageContext.request.contextPath}/khoa-hoc">Khóa học</a>
                                         </li>
                                         <li class="active">
                                             <a href="${current}">${courseList[0].typeName}</a>
@@ -56,7 +56,7 @@
                                 <c:choose>
                                     <C:when test="${fn:contains(current, '/danh-muc-tin/')}">
                                         <li>
-                                            <a href="/tin-tuc">Tin tức</a>
+                                            <a href="${pageContext.request.contextPath}/tin-tuc">Tin tức</a>
                                         </li>
                                         <li class="active">
                                             <a href="${current}">${postList[0].typeName}</a>

@@ -8,13 +8,13 @@
                 <div class="breadcrumb">
                     <ul>
                         <li>
-                            <a href="/">Trang chủ</a>
+                            <a href="${pageContext.request.contextPath}/">Trang chủ</a>
                         </li>
                         <c:set var="current" value="${requestScope['javax.servlet.forward.request_uri']}"/>
                         <c:choose>
                             <c:when test="${fn:contains(current, '/khoa-hoc/')}">
                                 <li>
-                                    <a href="/khoa-hoc/">Khóa học</a>
+                                    <a href="${pageContext.request.contextPath}/khoa-hoc/">Khóa học</a>
                                 </li>
                                 <li class="active">
                                     <a href="${course.typeUrl}">${course.typeName}</a>
@@ -23,7 +23,7 @@
                             </c:when>
                             <c:when test="${fn:contains(current, '/tin-tuc/')}">
                                 <li>
-                                    <a href="/tin-tuc/">Tin tức</a>
+                                    <a href="${pageContext.request.contextPath}/tin-tuc/">Tin tức</a>
                                 </li>
                                 <li class="active">
                                     <a href="${post.typeUrl}">${post.typeName}</a>

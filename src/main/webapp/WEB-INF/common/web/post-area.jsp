@@ -49,7 +49,7 @@
                         <div class="card_content">
                             <form:form action="${pageContext.request.contextPath}/tim-kiem" method="get" >
                                 <div class="searc-wrap">
-                                    <input type="text" name="khoa-hoc" placeholder="Tìm kiếm khóa học...">
+                                    <input type="text" name="khoa-hoc" placeholder="Tìm kiếm khóa học..." required>
                                     <button type="submit" class="search-wrap__btn">
                                         <span class="lnr lnr-magnifier"></span>
                                     </button>

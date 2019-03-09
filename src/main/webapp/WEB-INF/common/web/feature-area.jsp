@@ -8,7 +8,7 @@
             <div class="col-lg-4">
                 <div class="feature">
                     <div class="feature__img">
-                        <img src="/webstatic/src/images/dam-bao.png" alt="feature">
+                        <img src="${pageContext.request.contextPath}/webstatic/src/images/dam-bao.png" alt="feature">
                     </div>
                     <div class="feature__title">
                         <h3>Đảm bảo</h3>
@@ -26,7 +26,7 @@
             <div class="col-lg-4">
                 <div class="feature">
                     <div class="feature__img">
-                        <img src="/webstatic/src/images/chi-phi.png" alt="feature">
+                        <img src="${pageContext.request.contextPath}/webstatic/src/images/chi-phi.png" alt="feature">
                     </div>
                     <div class="feature__title">
                         <h3>Tiết kiệm</h3>
@@ -44,7 +44,7 @@
             <div class="col-lg-4">
                 <div class="feature">
                     <div class="feature__img">
-                        <img src="/webstatic/src/images/ho-tro.png" alt="feature">
+                        <img src="${pageContext.request.contextPath}/webstatic/src/images/ho-tro.png" alt="feature">
                     </div>
                     <div class="feature__title">
                         <h3>Hỗ trợ nhiệt tình</h3>

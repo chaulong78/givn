@@ -7,11 +7,11 @@
                 <div class="col-md-8">
                     <h2 class="sign_up_title">Đăng ký nhận thông tin</h2>
                     <div class="ticket_form">
-                        <form:form action="/contact" method="post" modelAttribute="contact">
+                        <form:form action="${pageContext.request.contextPath}/contact" method="post" modelAttribute="contact">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="name" placeholder="Tên của bạn">
+                                        <input type="text" name="name" placeholder="Tên của bạn" required>
                                     </div>
                                 </div>
                             </div>
@@ -19,7 +19,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="email" name="email" placeholder="Email">
+                                        <input type="email" name="email" placeholder="Email" required>
                                     </div>
                                 </div>
                             </div>

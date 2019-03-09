@@ -79,7 +79,7 @@
 
                         <div class="author-infos">
                             <div class="author_avatar">
-                                <img src="/webstatic/src/images/getinslogo.png"
+                                <img src="${pageContext.request.contextPath}/webstatic/src/images/getinslogo.png"
                                      alt="Presenting the broken author avatar :D">
                             </div>
 
@@ -105,7 +105,7 @@
                             <!-- end /.social -->
 
                             <div class="author-btn">
-                                <a href="/about-us" class="btn btn--sm btn--round">Thông tin</a>
+                                <a href="${pageContext.request.contextPath}/about-us" class="btn btn--sm btn--round">Thông tin</a>
                             </div>
                             <!-- end /.author-btn -->
                         </div>

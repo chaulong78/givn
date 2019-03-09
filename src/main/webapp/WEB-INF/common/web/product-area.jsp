@@ -95,7 +95,7 @@
 
             <div class="col-md-12">
                 <div class="more-product">
-                    <a href="/khoa-hoc" class="btn btn--lg btn--round">Tất cả khóa học</a>
+                    <a href="${pageContext.request.contextPath}/khoa-hoc" class="btn btn--lg btn--round">Tất cả khóa học</a>
                 </div>
             </div>
             <!-- end ./col-md-12 -->

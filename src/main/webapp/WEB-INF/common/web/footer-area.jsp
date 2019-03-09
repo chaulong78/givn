@@ -38,16 +38,16 @@
                         <h4 class="footer-widget-title text--white">Về công ty</h4>
                         <ul>
                             <li>
-                                <a href="/about-us">Giới thiệu</a>
+                                <a href="${pageContext.request.contextPath}/about-us">Giới thiệu</a>
                             </li>
                             <li>
-                                <a href="/khoa-hoc">Hệ thống khóa học</a>
+                                <a href="${pageContext.request.contextPath}/khoa-hoc">Hệ thống khóa học</a>
                             </li>
                             <li>
-                                <a href="/tuyen-dung">Tuyển dụng</a>
+                                <a href="${pageContext.request.contextPath}/tuyen-dung">Tuyển dụng</a>
                             </li>
                             <li>
-                                <a href="/lien-he">Liên hệ</a>
+                                <a href="${pageContext.request.contextPath}/lien-he">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
@@ -57,16 +57,16 @@
                         <h4 class="footer-widget-title text--white">Chính sách và điều khoản</h4>
                         <ul>
                             <li>
-                                <a href="/danh-cho-hoc-vien">Dành cho học viên</a>
+                                <a href="${pageContext.request.contextPath}/danh-cho-hoc-vien">Dành cho học viên</a>
                             </li>
                             <li>
-                                <a href="/chinh-sach">Chính sách bảo mật</a>
+                                <a href="${pageContext.request.contextPath}/chinh-sach">Chính sách bảo mật</a>
                             </li>
                             <li>
-                                <a href="/dieu-khoan">Điều khoản sử dụng</a>
+                                <a href="${pageContext.request.contextPath}/dieu-khoan">Điều khoản sử dụng</a>
                             </li>
                             <li>
-                                <a href="/giao-dich">Giao dịch</a>
+                                <a href="${pageContext.request.contextPath}/giao-dich">Giao dịch</a>
                             </li>
                         </ul>
                     </div>
@@ -81,7 +81,7 @@
                         <div class="newsletter__form">
                             <form:form action="${pageContext.request.contextPath}/contact" method="post" modelAttribute="contact">
                                 <div class="field-wrapper">
-                                    <input class="relative-field rounded" type="email" name="email" placeholder="Nhập email của bạn">
+                                    <input class="relative-field rounded" type="email" name="email" placeholder="Nhập email của bạn" required>
                                     <button class="btn btn--round" type="submit">Gửi</button>
                                 </div>
                             </form:form>

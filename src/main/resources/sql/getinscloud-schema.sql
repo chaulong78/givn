@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS getinscloud;
-CREATE DATABASE getinscloud;
+DROP DATABASE IF EXISTS getinsvn;
+CREATE DATABASE getinsvn;
 -- CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci;
-USE getinscloud;
+USE getinsvn;
 
 CREATE TABLE image
 (
@@ -12,10 +12,11 @@ CREATE TABLE image
 
 CREATE TABLE contact
 (
-  id    INT PRIMARY KEY AUTO_INCREMENT,
-  name  NVARCHAR(4000),
-  email VARCHAR(4000),
-  phone CHAR(11)
+  id      INT PRIMARY KEY AUTO_INCREMENT,
+  name    NVARCHAR(4000),
+  email   VARCHAR(4000),
+  phone   CHAR(11),
+  comment NVARCHAR(4000)
 );
 
 CREATE TABLE user
@@ -216,11 +217,13 @@ CREATE TABLE event
   id          INT PRIMARY KEY AUTO_INCREMENT,
   image       VARCHAR(4000),
   name        NVARCHAR(4000),
-  event_time  timestamp,
+  url_name    VARCHAR(4000),
+  event_time  VARCHAR(4000),
   event_place NVARCHAR(4000),
   description NVARCHAR(4000),
   content     MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
-  enabled     bit default 0
+  enabled     BIT default 0,
+  map         VARCHAR(4000)
 );
 
 CREATE TABLE speaker
@@ -244,3 +247,19 @@ CREATE TABLE event_speaker
     REFERENCES event (id)
     ON DELETE CASCADE
 );
+
+DELIMITER $$
+CREATE procedure `getinsvn`.`getNewestEvent`()
+BEGIN
+  SELECT *
+  FROM event
+  WHERE enabled = 1
+    AND id =
+        (SELECT MAX(id) FROM event);
+END;
+
+DELIMITER $$
+CREATE procedure `getinsvn`.`getNewestPost`()
+BEGIN
+  SELECT * FROM post ORDER BY id DESC LIMIT 3;
+END;

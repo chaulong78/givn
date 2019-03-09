@@ -82,7 +82,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="name" placeholder="Tên của bạn">
+                                        <input type="text" name="name" placeholder="Tên của bạn *" required>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="email" name="email" placeholder="Email">
+                                        <input type="email" name="email" placeholder="Email *" required>
                                     </div>
                                 </div>
                             </div>

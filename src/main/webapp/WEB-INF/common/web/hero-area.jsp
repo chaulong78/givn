@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <section class="hero-area hero--1 bgimage">
     <div class="bg_image_holder">
-        <img src="/webstatic/src/images/hero_area_bg2.png" alt="">
+        <img src="${pageContext.request.contextPath}/webstatic/src/images/hero_area_bg2.png" alt="">
     </div>
     <!-- start hero-content -->
     <div class="hero-content content_above">
@@ -25,7 +25,7 @@
 
                         <!-- start .hero__btn-area-->
                         <div class="hero__btn-area">
-                            <a href="/khoa-hoc" class="btn btn--round btn--lg">Tất cả khóa học</a>
+                            <a href="${pageContext.request.contextPath}/khoa-hoc" class="btn btn--round btn--lg">Tất cả khóa học</a>
                         </div>
                         <!-- end .hero__btn-area-->
                     </div>
@@ -51,7 +51,7 @@
                     <div class="search_box">
                         <form:form action="${pageContext.request.contextPath}/tim-kiem" method="get" >
                             <input type="text" class="text_field" name="khoa-hoc"
-                                   placeholder="Hàng trăm khóa học đang chờ đón bạn. Tìm hiểu ngay...">
+                                   placeholder="Hàng trăm khóa học đang chờ đón bạn. Tìm hiểu ngay..." required>
                             <div class="search__select">
                             </div>
                             <button type="submit" class="search-btn btn--lg">Get it!</button>

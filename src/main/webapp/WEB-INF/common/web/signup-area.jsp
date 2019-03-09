@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
-                <form:form class="login-form" action="/signup" method="post"
+                <form:form class="login-form" action="${pageContext.request.contextPath}/signup" method="post"
                            modelAttribute="user">
                     <div class="cardify signup_form">
                         <div class="login--header">
@@ -18,25 +18,25 @@
                         <div class="login--form">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" name="email" type="email" class="text_field">
+                                <input id="email" name="email" type="email" class="text_field" required>
                             </div>
                             <div class="form-group">
                                 <label for="username">Tên đăng nhập</label>
-                                <input id="username" name="username" type="text" class="text_field">
+                                <input id="username" name="username" type="text" class="text_field" required>
                             </div>
                             <div class="form-group">
                                 <label for="password">Mật khẩu</label>
-                                <input id="password" name="password" type="password" class="text_field">
+                                <input id="password" name="password" type="password" class="text_field" required>
                             </div>
                             <div class="form-group">
                                 <label for="password-again">Nhập lại mật khẩu</label>
-                                <input id="password-again" name="passwordAgain" type="password" class="text_field">
+                                <input id="password-again" name="passwordAgain" type="password" class="text_field" required>
                             </div>
                             <button class="btn btn--md btn--round register_btn" type="submit">Đăng ký</button>
 
                             <div class="login_assist">
                                 <p>Đã có tài khoản?
-                                    <a href="/login">Đăng nhập</a>
+                                    <a href="${pageContext.request.contextPath}/login">Đăng nhập</a>
                                 </p>
                             </div>
                         </div>

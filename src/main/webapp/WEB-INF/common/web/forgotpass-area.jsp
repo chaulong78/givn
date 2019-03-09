@@ -16,7 +16,7 @@
                         <div class="login--form">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" name="email" type="text" class="text_field">
+                                <input id="email" name="email" type="text" class="text_field" required>
                             </div>
 
                             <button class="btn btn--md btn--round" type="submit">Gửi</button>

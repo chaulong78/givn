@@ -40,7 +40,7 @@
 
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" name="email" type="email" class="text_field" value="${profile.email}">
+                                <input id="email" name="email" type="email" class="text_field" value="${profile.email}" required>
                             </div>
 
                             <div class="form-group">

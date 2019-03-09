@@ -71,7 +71,7 @@ public class RegisterService {
         if (!validateEmailPattern(userRegisterDTO.getEmail())) {
             message = "Email không đúng định dạng";
         } else if (!checkUsernameLength(userRegisterDTO.getUsername())) {
-            message = "Độ dài tên đăng nhập từ 6 đến 100 ký tự";
+            message = "Độ dài tên đăng nhập từ 6 đến 25 ký tự";
         } else if (!checkPasswordLength(userRegisterDTO.getPassword())) {
             message = "Độ dài mật khẩu từ 6 đến 100 ký tự";
         } else if (!checkIfPasswordIsMatch(userRegisterDTO.getPassword(), userRegisterDTO.getPasswordAgain())) {
@@ -86,7 +86,7 @@ public class RegisterService {
     public String validPasswordReset(String password, String again) {
         String message = null;
         if (!checkPasswordLength(password)) {
-            message = "Độ dài mật khẩu từ 6 đến 10 ký tự";
+            message = "Độ dài mật khẩu từ 6 đến 100 ký tự";
         } else if (!checkIfPasswordIsMatch(password, again)) {
             message = "Nhập lại mật khẩu không đúng";
         }

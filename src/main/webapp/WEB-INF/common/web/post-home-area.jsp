@@ -55,7 +55,7 @@
 
         <div class="col-md-12">
             <div class="more-product">
-                <a href="/tin-tuc" class="btn btn--lg btn--round">Tất cả tin tuc</a>
+                <a href="${pageContext.request.contextPath}/tin-tuc" class="btn btn--lg btn--round">Tất cả tin tuc</a>
             </div>
         </div>
         <!-- end ./col-md-12 -->

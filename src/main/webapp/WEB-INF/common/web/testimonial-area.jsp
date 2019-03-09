@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <section class="testimonial-area testimonial--2 section--padding bgimage">
     <div class="bg_image_holder">
-        <img src="images/testibg.jpg" alt="">
+        <img src="${pageContext.request.contextPath}/webstatic/src/images/testibg.jpg" alt="">
     </div>
 
     <!-- start .container -->
@@ -28,7 +28,8 @@
                     <div class="testimonial">
                         <div class="testimonial__about">
                             <div class="avatar v_middle">
-                                <img src="/webstatic/src/images/test3.png" alt="Testimonial Avatar">
+                                <img src="${pageContext.request.contextPath}/webstatic/src/images/test3.png"
+                                     alt="Testimonial Avatar">
                             </div>
                             <div class="name-designation v_middle">
                                 <h4 class="name">Đỗ Nam Trung</h4>
@@ -49,7 +50,8 @@
                     <div class="testimonial">
                         <div class="testimonial__about">
                             <div class="avatar v_middle">
-                                <img src="/webstatic/src/images/test4.png" alt="Testimonial Avatar">
+                                <img src="${pageContext.request.contextPath}/webstatic/src/images/test4.png"
+                                     alt="Testimonial Avatar">
                             </div>
                             <div class="name-designation v_middle">
                                 <h4 class="name">Kim Chính Ân</h4>

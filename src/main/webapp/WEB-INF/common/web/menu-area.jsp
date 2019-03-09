@@ -100,7 +100,7 @@
                         <div class="mainmenu__search">
                             <form:form action="${pageContext.request.contextPath}/tim-kiem" method="get" >
                                 <div class="searc-wrap">
-                                    <input type="text" name="khoa-hoc" placeholder="Bạn muốn học gì?">
+                                    <input type="text" name="khoa-hoc" placeholder="Bạn muốn học gì?" required>
                                     <button type="submit" class="search-wrap__btn">
                                         <span class="lnr lnr-magnifier"></span>
                                     </button>

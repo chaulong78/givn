@@ -1,7 +1,6 @@
 package com.msp.givn.repository.post.custom;
 
 import com.msp.givn.entity.Post;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

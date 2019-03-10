@@ -1,7 +1,6 @@
 package com.msp.givn.dao.media.impl;
 
 import com.msp.givn.dao.media.LocalUploadDAO;
-import org.mockito.internal.util.io.IOUtil;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;

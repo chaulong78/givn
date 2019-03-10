@@ -55,12 +55,10 @@ public class UrlAuthenticationSuccessHandlerImpl implements AuthenticationSucces
     protected String determineTargetUrl(Authentication auth) {
         boolean isUser = false;
         boolean isAdmin = false;
-//        String authority = null;
 
         Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
 
         for (GrantedAuthority ga : authorities) {
-//            authority = ga.getAuthority();
 
             if ("ROLE_USER".equals(ga.toString())){
                 isUser = true;
@@ -78,13 +76,5 @@ public class UrlAuthenticationSuccessHandlerImpl implements AuthenticationSucces
         } else {
             throw new IllegalStateException();
         }
-    }
-
-    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
-        this.redirectStrategy = redirectStrategy;
-    }
-
-    protected RedirectStrategy getRedirectStrategy() {
-        return redirectStrategy;
     }
 }

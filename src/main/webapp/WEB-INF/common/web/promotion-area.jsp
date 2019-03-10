@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6 v_middle">
                 <div class="promotion-img">
-                    <img src="${pageContext.request.contextPath}/webstatic/src/images/kawai.png" alt="Promotion image">
+                    <img src="${event.image}" alt="Promotion image">
                 </div>
                 <!-- end /.promotion-img -->
             </div>

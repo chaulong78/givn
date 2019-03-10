@@ -6,38 +6,38 @@ USE getinsvn;
 CREATE TABLE image
 (
   id   INT PRIMARY KEY AUTO_INCREMENT,
-  size VARCHAR(250),
-  url  VARCHAR(4000)
+  size VARCHAR(1000),
+  url  VARCHAR(1000)
 );
 
 CREATE TABLE contact
 (
   id      INT PRIMARY KEY AUTO_INCREMENT,
-  name    NVARCHAR(4000),
-  email   VARCHAR(4000),
+  name    NVARCHAR(1000),
+  email   VARCHAR(1000),
   phone   CHAR(11),
-  comment NVARCHAR(4000)
+  comment NVARCHAR(1000)
 );
 
 CREATE TABLE user
 (
   id        INT PRIMARY KEY AUTO_INCREMENT,
-  user_name VARCHAR(255) UNIQUE NOT NULL,
-  password  VARCHAR(4000)       NOT NULL,
-  email     VARCHAR(255) UNIQUE NOT NULL,
-  avatar    VARCHAR(4000),
+  user_name VARCHAR(1000) UNIQUE NOT NULL,
+  password  VARCHAR(1000)       NOT NULL,
+  email     VARCHAR(1000) UNIQUE NOT NULL,
+  avatar    VARCHAR(1000),
   enabled   BIT DEFAULT 1
 );
 
 CREATE TABLE user_detail
 (
   user_id    INT PRIMARY KEY,
-  full_name  NVARCHAR(4000),
+  full_name  NVARCHAR(1000),
   birth_date DATE DEFAULT '2000-1-1',
   gender     BIT  DEFAULT 1,
-  address    NVARCHAR(4000),
+  address    NVARCHAR(1000),
   phone      CHAR(11),
-  job        NVARCHAR(4000),
+  job        NVARCHAR(1000),
   CONSTRAINT FK_userDetail_user FOREIGN KEY (user_id)
     REFERENCES user (id)
     ON DELETE CASCADE
@@ -46,8 +46,8 @@ CREATE TABLE user_detail
 CREATE TABLE role
 (
   id          INT PRIMARY KEY AUTO_INCREMENT,
-  name        VARCHAR(255) UNIQUE NOT NULL,
-  description NVARCHAR(4000),
+  name        VARCHAR(1000) UNIQUE NOT NULL,
+  description NVARCHAR(1000),
   enabled     BIT DEFAULT 1
 );
 
@@ -66,11 +66,11 @@ CREATE TABLE user_role
 
 CREATE TABLE app_function
 (
-  id        VARCHAR(50) PRIMARY KEY,
-  name      NVARCHAR(4000),
-  url       VARCHAR(4000),
-  icon      VARCHAR(4000),
-  parent_id VARCHAR(50),
+  id        VARCHAR(1000) PRIMARY KEY,
+  name      NVARCHAR(1000),
+  url       VARCHAR(1000),
+  icon      VARCHAR(1000),
+  parent_id VARCHAR(1000),
   CONSTRAINT FK_function_function FOREIGN KEY (parent_id)
     REFERENCES app_function (id)
     ON DELETE CASCADE
@@ -96,9 +96,9 @@ CREATE TABLE role_function
 CREATE TABLE post_type
 (
   id          INT PRIMARY KEY AUTO_INCREMENT,
-  name        NVARCHAR(4000) NOT NULL,
-  url_name    VARCHAR(4000)  NOT NULL,
-  description NVARCHAR(4000)
+  name        NVARCHAR(1000) NOT NULL,
+  url_name    VARCHAR(1000)  NOT NULL,
+  description NVARCHAR(1000)
 );
 
 CREATE TABLE post
@@ -107,11 +107,11 @@ CREATE TABLE post
   author_id   INT,
   type_id     INT,
   name        MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
-  url_name    VARCHAR(4000)                                                  NOT NULL,
-  description NVARCHAR(4000),
-  image       varchar(4000),
+  url_name    VARCHAR(1000)                                                  NOT NULL,
+  description NVARCHAR(1000),
+  image       varchar(1000),
   content     MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
-  attach      VARCHAR(4000),
+  attach      VARCHAR(1000),
   create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   enabled     BIT       DEFAULT 1,
   CONSTRAINT FK_post_user FOREIGN KEY (author_id)
@@ -123,9 +123,9 @@ CREATE TABLE post
 CREATE TABLE course_type
 (
   id          INT PRIMARY KEY AUTO_INCREMENT,
-  name        NVARCHAR(255) UNIQUE NOT NULL,
-  url_name    VARCHAR(4000)        NOT NULL,
-  description NVARCHAR(4000)
+  name        NVARCHAR(1000) UNIQUE NOT NULL,
+  url_name    VARCHAR(1000)        NOT NULL,
+  description NVARCHAR(1000)
 );
 
 CREATE TABLE course
@@ -133,11 +133,11 @@ CREATE TABLE course
   id          INT PRIMARY KEY AUTO_INCREMENT,
   author_id   INT,
   type_id     INT,
-  name        NVARCHAR(4000)                                                 NOT NULL,
-  url_name    VARCHAR(4000)                                                  NOT NULL,
+  name        NVARCHAR(1000)                                                 NOT NULL,
+  url_name    VARCHAR(1000)                                                  NOT NULL,
   description MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
   content     MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
-  video_url   VARCHAR(4000),
+  video_url   VARCHAR(1000),
   price       VARCHAR(250),
   rating      SMALLINT DEFAULT 0,
   requirement MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI,
@@ -154,8 +154,8 @@ CREATE TABLE class
   id             INT PRIMARY KEY AUTO_INCREMENT,
   course_id      INT,
   teacher_id     INT,
-  name           NVARCHAR(4000) NOT NULL,
-  url_name       VARCHAR(4000)  NOT NULL,
+  name           NVARCHAR(1000) NOT NULL,
+  url_name       VARCHAR(1000)  NOT NULL,
   student_number TINYINT DEFAULT 0,
   description    MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI,
   begin_date     DATE,
@@ -215,24 +215,24 @@ CREATE TABLE password_reset_token
 CREATE TABLE event
 (
   id          INT PRIMARY KEY AUTO_INCREMENT,
-  image       VARCHAR(4000),
-  name        NVARCHAR(4000),
-  url_name    VARCHAR(4000),
-  event_time  VARCHAR(4000),
-  event_place NVARCHAR(4000),
-  description NVARCHAR(4000),
+  image       VARCHAR(1000),
+  name        NVARCHAR(1000),
+  url_name    VARCHAR(1000),
+  event_time  VARCHAR(1000),
+  event_place NVARCHAR(1000),
+  description NVARCHAR(1000),
   content     MEDIUMTEXT CHARACTER SET UTF8MB4 COLLATE UTF8MB4_VIETNAMESE_CI NOT NULL,
   enabled     BIT default 0,
-  map         VARCHAR(4000)
+  map         VARCHAR(1000)
 );
 
 CREATE TABLE speaker
 (
   id          INT PRIMARY KEY AUTO_INCREMENT,
-  name        NVARCHAR(4000),
-  image       VARCHAR(4000),
-  job         NVARCHAR(4000),
-  description NVARCHAR(4000)
+  name        NVARCHAR(1000),
+  image       VARCHAR(1000),
+  job         NVARCHAR(1000),
+  description NVARCHAR(1000)
 );
 
 CREATE TABLE event_speaker

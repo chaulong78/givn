@@ -92,18 +92,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/account", "/admin/account/", "/admin/account/*").hasAnyRole("MANAGER", "ADMIN", "POSTER")
-                .antMatchers("/admin/system", "/admin/system/", "/admin/system/*", "/admin/system/*/*").hasRole("ADMIN")
-                .antMatchers("/admin/course", "/admin/course/", "/admin/course/*", "/admin/course/*/*").hasAnyRole("ADMIN", "MANAGER")
-                .antMatchers("/admin/event", "/admin/event/", "/admin/event/*", "/admin/event/*/*", "/admin/event/*/*/*").hasAnyRole("ADMIN", "MANAGER", "POSTER")
-                .antMatchers("/admin/media", "/admin/media/", "/admin/media/*/*").hasAnyRole("ADMIN", "MANAGER", "POSTER")
-                .antMatchers("/admin", "/admin/*", "/admin/*/*"
-                        , "/admin/*/*/*", "/admin/*/*/*/*", "/admin/*/*/*/*/*").hasAnyRole("ADMIN", "MANAGER", "POSTER")
+                /*Tài khoản người dùng + liên hệ*/
+                .antMatchers("/admin/account", "/admin/account/", "/admin/account/contact").hasAnyRole("MANAGER", "ADMIN", "SALE")
+                .antMatchers("/admin/account/*", "/admin/account/*/*").hasAnyRole("MANAGER", "ADMIN")
 
-                .antMatchers("/signup", "/signup/*"
+                /*Khóa học + lớp học*/
+                .antMatchers("/admin/course", "/admin/course/type", "/admin/course/class").hasAnyRole("MANAGER", "ADMIN", "SALE")
+                .antMatchers("/admin/course/*", "/admin/course/*/*").hasAnyRole("MANAGER", "ADMIN")
+
+                /*Những chức năng còn lại trang admin*/
+                .antMatchers("/admin", "/admin/*", "/admin/*/*", "/admin/*/*/*").hasAnyRole("MANAGER", "ADMIN", "SALE")
+
+                .antMatchers("/login", "/login/*", "/signup", "/signup/*"
                         , "/forgot-pass", "/forgot-pass/*"
                         , "/reset-pass", "/reset-pass/*").anonymous()
-                .antMatchers( "/", "/*").permitAll();
+                .antMatchers("/", "/*").permitAll();
 
         http.authorizeRequests().and().formLogin()
                 .loginPage("/login")

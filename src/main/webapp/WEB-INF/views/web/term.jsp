@@ -13,7 +13,7 @@
     <meta name="keywords"
           content="IOT, internet of things, vạn vật kết nôi, học online, tự học, khóa học, điện tử, lập trình, arduino, vi điều khiển, get ins, getinsvn">
 
-    <title>Get Ins - Dành cho học viên</title>
+    <title>Get Ins - Điều khoản sử dụng</title>
 
     <!-- inject:css -->
     <link rel="stylesheet" href="/webstatic/src/css/animate.css">

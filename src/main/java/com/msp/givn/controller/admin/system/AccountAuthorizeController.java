@@ -68,10 +68,15 @@ public class AccountAuthorizeController {
             , @RequestParam(value = "enabled", required = false) String checkBox
             , BindingResult result
             , RedirectAttributes redirectAttributes) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/admin/system/account");
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/account");
 
         if (!result.hasErrors()) {
-            if (roleService.findById(roleId) != null && roleService.findById(roleId) != null) {
+            if (roleId == 1) {
+                redirectAttributes.addFlashAttribute("message", "Không thể sửa tài khoản này");
+                return modelAndView;
+            }
+
+            if (roleService.findById(roleId) != null) {
                 userRoleService.updateRoleForUser(accountDTO.getId(), roleId);
                 userService.updateEnabled(accountDTO.getId(), checkBox != null ? true : false);
                 expireUser(accountDTO.getId());

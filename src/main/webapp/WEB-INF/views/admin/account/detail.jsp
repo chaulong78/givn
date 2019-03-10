@@ -72,9 +72,7 @@
                         <div class="col s12 m12 l12">
                             <div class="card-panel">
                                 <div class="row">
-                                    <form:form
-                                            action="#"
-                                            method="post" class="col s12" modelAttribute="profileDTO">
+                                    <form:form action="#" method="post" class="col s12" modelAttribute="profileDTO">
                                         <input type="hidden" name="id" value="${profileDTO.id}">
                                         <input type="hidden" name="userName" value="${profileDTO.userName}">
                                         <div class="row">

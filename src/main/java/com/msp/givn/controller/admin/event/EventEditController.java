@@ -72,7 +72,7 @@ public class EventEditController {
             event.setUrlName(url);
 
             eventService.save(event);
-            if (checkBox.length > 0) {
+            if (checkBox!=null) {
                 eventService.updateSpeakerForEvent(checkBox, event.getId());
             }
 

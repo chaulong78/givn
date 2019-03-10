@@ -86,7 +86,7 @@ public class AccountChangePassController {
             User user = userService.findById(id);
             if (user != null) {
                 if (user.getRoles().get(0).getName().equals("ROLE_ADMIN")) {
-                    message = "Không thể thay đổi quyền admin";
+                    message = "Không thể sửa tài khoản này";
                     redirectAttributes.addFlashAttribute("message", message);
                     return modelAndView;
                 }

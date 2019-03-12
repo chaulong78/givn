@@ -1,6 +1,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <div class="menu-area">
     <!-- start .top-menu-area -->
@@ -13,7 +14,8 @@
                 <div class="col-lg-3 col-md-3 col-6 v_middle">
                     <div class="logo">
                         <a href="${pageContext.request.contextPath}/">
-                            <img src="${pageContext.request.contextPath}/webstatic/src/images/logo1.png" alt="logo image" class="img-fluid">
+                            <img src="${pageContext.request.contextPath}/webstatic/src/images/logo1.png"
+                                 alt="logo image" class="img-fluid">
                         </a>
                     </div>
                 </div>
@@ -25,8 +27,10 @@
                     <div class="author-area">
                         <br>
                         <sec:authorize access="hasRole('ANONYMOUS')">
-                            <a href="${pageContext.request.contextPath}/login" class="author-area__seller-btn inline">Đăng nhập</a>
-                            <a href="${pageContext.request.contextPath}/signup" class="author-area__seller-btn inline">Đăng kí</a>
+                            <a href="${pageContext.request.contextPath}/login" class="author-area__seller-btn inline">Đăng
+                                nhập</a>
+                            <a href="${pageContext.request.contextPath}/signup" class="author-area__seller-btn inline">Đăng
+                                kí</a>
                         </sec:authorize>
                         <div class="author__notification_area">
                             <ul>
@@ -78,6 +82,55 @@
                         <!--end /.author-author__info-->
                     </div>
                     <!-- end .author-area -->
+
+                    <!-- author area restructured for mobile -->
+                    <div class="mobile_content ">
+                        <span class="lnr lnr-user menu_icon"></span>
+
+                        <!-- offcanvas menu -->
+                        <div class="offcanvas-menu closed">
+                            <span class="lnr lnr-cross close_menu"></span>
+                            <div class="author-author__info">
+                                <div class="author__avatar v_middle">
+                                    <%--<img src="<sec:authentication property="principal.avatar"/>" alt="">--%>
+                                </div>
+                                <div class="autor__info v_middle">
+                                    <p class="name">
+                                        <%--<sec:authentication property="principal.username"/>--%>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="dropdown dropdown--author">
+                                <ul>
+                                    <sec:authorize access="hasRole('ANONYMOUS')">
+                                        <li>
+                                            <a href="/login">
+                                                <span class="lnr"></span>Đăng nhập</a>
+                                        </li>
+                                        <li>
+                                            <a href="/signup">
+                                                <span class="lnr"></span>Đăng ký</a>
+                                        </li>
+                                    </sec:authorize>
+                                    <sec:authorize access="!hasRole('ANONYMOUS')">
+                                        <li>
+                                            <a href="/profile">
+                                                <span class="lnr"></span>Thông tin cá nhân</a>
+                                        </li>
+                                        <li>
+                                            <a href="/cart">
+                                                <span class="lnr"></span>Giỏ hàng</a>
+                                        </li>
+                                        <li>
+                                            <a href="/logout">
+                                                <span class="lnr"></span>Đăng xuất</a>
+                                        </li>
+                                    </sec:authorize>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end /.mobile_content -->
                 </div>
                 <!-- end /.col-md-5 -->
             </div>
@@ -98,7 +151,7 @@
                     <div class="navbar-header">
                         <!-- start mainmenu__search -->
                         <div class="mainmenu__search">
-                            <form:form action="${pageContext.request.contextPath}/tim-kiem" method="get" >
+                            <form:form action="${pageContext.request.contextPath}/tim-kiem" method="get">
                                 <div class="searc-wrap">
                                     <input type="text" name="khoa-hoc" placeholder="Bạn muốn học gì?" required>
                                     <button type="submit" class="search-wrap__btn">
@@ -119,10 +172,10 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
-                                <li class="has_dropdown">
+                                <li>
                                     <a href="${pageContext.request.contextPath}/">Trang chủ</a>
                                 </li>
-                                <li class="has_dropdown">
+                                <li class="${fn:length(courseTypeList)!=0?'has_dropdown':''}">
                                     <a href="${pageContext.request.contextPath}/khoa-hoc">Khóa học</a>
                                     <div class="dropdown dropdown--menu">
                                         <ul>
@@ -134,7 +187,7 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="has_dropdown">
+                                <li class="${fn:length(postTypeList)!=0?'has_dropdown':''}">
                                     <a href="${pageContext.request.contextPath}/tin-tuc">Tin tức</a>
                                     <div class="dropdown dropdown--menu">
                                         <ul>
@@ -146,7 +199,7 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="has_megamenu">
+                                <li>
                                     <a href="${pageContext.request.contextPath}/su-kien">Sự kiện</a>
                                 </li>
                                 <li>

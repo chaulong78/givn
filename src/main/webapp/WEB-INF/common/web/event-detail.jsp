@@ -57,20 +57,22 @@
     </div>
     <!-- end /.container -->
 
-    <div class="google_map">
-        <div class="location_address">
-            <div class="addres_module">
-                <h4>${event.eventPlace}</h4>
-                <p>
-                    <span class="lnr lnr-phone-handset"></span>+84 973 755 035</p>
-                <p>
-                    <span class="lnr lnr-envelope"></span>getinsvietnam@gmail.com</p>
+    <c:if test="${event.map!=null && event.map!=''}">
+        <div class="google_map">
+            <div class="location_address">
+                <div class="addres_module">
+                    <h4>${event.eventPlace}</h4>
+                    <p>
+                        <span class="lnr lnr-phone-handset"></span>+84 973 755 035</p>
+                    <p>
+                        <span class="lnr lnr-envelope"></span>getinsvietnam@gmail.com</p>
+                </div>
             </div>
-        </div>
 
-        ${event.map}
-        <!-- end /.map -->
-    </div>
+                ${event.map}
+            <!-- end /.map -->
+        </div>
+    </c:if>
 
     <div class="sign_up_area">
         <div class="container">

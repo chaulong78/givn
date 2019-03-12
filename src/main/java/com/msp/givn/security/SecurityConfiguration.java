@@ -103,8 +103,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /*Những chức năng còn lại trang admin*/
                 .antMatchers("/admin", "/admin/*", "/admin/*/*", "/admin/*/*/*").hasAnyRole("MANAGER", "ADMIN", "SALE")
 
+                .antMatchers("/profile", "/profile/*").hasAnyRole("ADMIN", "MANAGER", "SALE", "USER")
                 .antMatchers("/login", "/login/*", "/signup", "/signup/*"
-                        , "/forgot-pass", "/forgot-pass/*"
+                        , "/forgot-pass", "/forgot-pass/*", "/change-pass", "/change-pass/*"
                         , "/reset-pass", "/reset-pass/*").anonymous()
                 .antMatchers("/", "/*").permitAll();
 

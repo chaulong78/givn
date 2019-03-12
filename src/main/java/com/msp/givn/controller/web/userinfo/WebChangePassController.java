@@ -1,6 +1,5 @@
 package com.msp.givn.controller.web.userinfo;
 
-import com.msp.givn.config.CustomUserDetail;
 import com.msp.givn.dto.PasswordChangeDTO;
 import com.msp.givn.entity.CourseType;
 import com.msp.givn.entity.PostType;

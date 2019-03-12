@@ -69,7 +69,9 @@
 <!--================================
     START PROMOTION AREA
 =================================-->
-<c:import url="../../common/web/promotion-area.jsp"/>
+<c:if test="${event!=null}">
+    <c:import url="../../common/web/promotion-area.jsp"/>
+</c:if>
 <!--================================
     END PROMOTION AREA
 =================================-->

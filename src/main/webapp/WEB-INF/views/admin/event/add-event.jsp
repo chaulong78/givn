@@ -80,7 +80,7 @@
                                             <img src="${event.image}">
                                             <div class="input-field col s6">
                                                 <input id="image" name="image" type="text"
-                                                       value="${event.image}" required>
+                                                       value="${event.image}">
                                                 <label for="image">Ảnh đại diện sự kiện</label>
                                             </div>
                                             <div class="input-field col s6">
